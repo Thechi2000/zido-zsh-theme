@@ -87,6 +87,6 @@ proc_status() {
 setopt PROMPT_SUBST
 
 precmd() {
-  PROMPT="%{$fg[magenta]%}($(hostname)) $(user_status)%B%{$fg[cyan]%}%5~% %(?.%{$fg[green]%}.%{$fg[red]%}) $(git_custom_status) $%b "
+  PROMPT="%{$fg[magenta]%}($(hostname))  $(user_status)%B%{$fg[cyan]%}%5~% %(?.%{$fg[green]%}.%{$fg[red]%}) $(git_custom_status) $%b "
   RPROMPT="$(proc_status)$(venv_status)"
 }
