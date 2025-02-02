@@ -56,31 +56,26 @@ git_custom_status() {
 }
 autoload -U colors && colors
 
-# Customized prompt status
-prompt_status() {
-  local symbols
-  symbols=()
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{blue}%}$GEARS"
-
-  echo "$symbols"
+jobs_status() {
+  echo "%(1j.%{$fg[cyan]%}$GEARS %b.)"
 }
 
 user_status() {
-    echo "%(#.$ROOT_USER  .)"
+    echo "%(#.$ROOT_USER .)"
 }
 
 venv_status() {
   if [ "$VIRTUAL_ENV" != "" ]; then
-    echo "%{$fg[blue]%}(venv: $(basename $(dirname $VIRTUAL_ENV)))%b"
+    echo "%{$fg[blue]%}(venv: $(basename $(dirname $VIRTUAL_ENV)))%b  "
   fi
 }
 
 proc_status() {
-  echo "%(?..%{$fg[red]%}%B%? $RET_INDICATOR%b)  "
+  echo "%(?..%{$fg[red]%}%B%? $RET_INDICATOR%b) "
 }
 
 host_status() {
-  echo "%{$fg[magenta]%}($(hostname))"
+  echo "%{$fg[magenta]%}($(hostname)) "
 }
 
 pwd_status() {
@@ -91,5 +86,5 @@ setopt PROMPT_SUBST
 
 precmd() {
   PROMPT="$(host_status)$(user_status)$(pwd_status)$(git_custom_status) $%b "
-  RPROMPT="$(proc_status)$(venv_status)"
+  RPROMPT="$(proc_status)$(venv_status)$(jobs_status)"
 }
