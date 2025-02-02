@@ -67,8 +67,15 @@ user_status() {
     echo "%(#.$ROOT_USER  .)"
 }
 
+venv_status() {
+  if [ "$VIRTUAL_ENV" != "" ]; then
+    echo "%{$fg[blue]%}(venv: $(basename $(dirname $VIRTUAL_ENV)))%b"
+  fi
+}
+
 setopt PROMPT_SUBST
 
 precmd() {
   PROMPT="%{$fg[magenta]%}($(hostname)) $(user_status)%B%{$fg[cyan]%}%~% %(?.%{$fg[green]%}.%{$fg[red]%}) $(git_custom_status) $%b "
+  RPROMPT="$(venv_status)"
 }
