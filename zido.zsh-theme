@@ -52,7 +52,7 @@ git_status_icons() {
 git_custom_status() {
   local current_branch=$(git_current_branch)
   [[ -n "$current_branch" ]] || return 0
-  echo "${ZSH_THEME_GIT_PROMPT_PREFIX}$(git_remote_status) ${GIT_BRANCH} ${current_branch}$(git_status_icons)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+  echo "${ZSH_THEME_GIT_PROMPT_PREFIX} $(git_remote_status) ${GIT_BRANCH} ${current_branch}$(git_status_icons)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 autoload -U colors && colors
 
