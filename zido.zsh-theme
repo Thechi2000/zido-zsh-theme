@@ -79,7 +79,7 @@ host_status() {
 }
 
 pwd_status() {
-  echo "%B%{$fg[cyan]%}%5~% %(?.%{$fg[green]%}.%{$fg[red]%}) "
+  echo "%B%{$fg[cyan]%}%5~% "
 }
 
 lang_status() {
