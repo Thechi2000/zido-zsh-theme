@@ -76,17 +76,20 @@ venv_status() {
 }
 
 proc_status() {
-  # res=$?
-
-  # if [ "$res" != "0" ]; then
-  #   echo "%{$fg[red]%}$res %b"
-  # fi
   echo "%(?..%{$fg[red]%}%B%? $RET_INDICATOR%b)  "
+}
+
+host_status() {
+  echo "%{$fg[magenta]%}($(hostname))"
+}
+
+pwd_status() {
+  echo "%B%{$fg[cyan]%}%5~% %(?.%{$fg[green]%}.%{$fg[red]%}) "
 }
 
 setopt PROMPT_SUBST
 
 precmd() {
-  PROMPT="%{$fg[magenta]%}($(hostname))  $(user_status)%B%{$fg[cyan]%}%5~% %(?.%{$fg[green]%}.%{$fg[red]%}) $(git_custom_status) $%b "
+  PROMPT="$(host_status)$(user_status)$(pwd_status)$(git_custom_status) $%b "
   RPROMPT="$(proc_status)$(venv_status)"
 }
