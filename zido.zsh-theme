@@ -70,6 +70,6 @@ user_status() {
 setopt PROMPT_SUBST
 
 precmd() {
-  RPROMPT="$(git_custom_status)"
-  PROMPT="$(user_status)%B%{%F{#1e81b0}%}%~% %(?.%{$fg[green]%}.%{$fg[red]%}) $%b %{%F{none}%}"
+
+  PROMPT="$(user_status)%B%{$fg[cyan]%}%~% %(?.%{$fg[green]%}.%{$fg[red]%}) $(git_custom_status) $%b "
 }
