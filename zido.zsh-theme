@@ -82,9 +82,35 @@ pwd_status() {
   echo "%B%{$fg[cyan]%}%5~% %(?.%{$fg[green]%}.%{$fg[red]%}) "
 }
 
+lang_status() {
+  typeset -A PROJECTS=(
+    [Cargo.toml]='\ue68b'
+    [Makefile.txt]='\ue673'
+    [Makefile]='\ue673'
+    [makefile]='\ue673'
+    [requirements.txt]='\ue73c'
+    [requirement.txt]='\ue73c'
+    [package.json]='\uf2ef'
+    [tsconfig.json]='\ue69d'
+    [CMakeLists.txt]='\ue794'
+    [build.sbt]='\ue68e'
+    [pubspec.yaml]='\ue7dd'
+    [build.gradle]='\ue660'
+  )
+  local total=""
+
+  for key value in ${(kv)PROJECTS}; do
+    if [[ -f "$key" ]]; then
+      total+="$value "
+    fi
+  done
+
+  echo "%B%{$fg[magenta]%}$total%b"
+}
+
 setopt PROMPT_SUBST
 
 precmd() {
   PROMPT="$(host_status)$(user_status)$(pwd_status)$(git_custom_status) >%b "
-  RPROMPT="$(proc_status)$(venv_status)$(jobs_status)"
+  RPROMPT="$(proc_status)$(lang_status)$(venv_status)$(jobs_status)"
 }
