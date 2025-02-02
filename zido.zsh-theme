@@ -10,6 +10,8 @@ GIT_BRANCH_SYNC='\Uf14ce'
 GIT_STASH='\Uf003c'
 ROOT_USER='\uedc8'
 
+RET_INDICATOR='\uf060'
+
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
@@ -73,9 +75,18 @@ venv_status() {
   fi
 }
 
+proc_status() {
+  # res=$?
+
+  # if [ "$res" != "0" ]; then
+  #   echo "%{$fg[red]%}$res %b"
+  # fi
+  echo "%(?..%{$fg[red]%}%B%? $RET_INDICATOR%b)  "
+}
+
 setopt PROMPT_SUBST
 
 precmd() {
   PROMPT="%{$fg[magenta]%}($(hostname)) $(user_status)%B%{$fg[cyan]%}%~% %(?.%{$fg[green]%}.%{$fg[red]%}) $(git_custom_status) $%b "
-  RPROMPT="$(venv_status)"
+  RPROMPT="$(proc_status)$(venv_status)"
 }
