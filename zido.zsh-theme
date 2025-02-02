@@ -85,6 +85,6 @@ pwd_status() {
 setopt PROMPT_SUBST
 
 precmd() {
-  PROMPT="$(host_status)$(user_status)$(pwd_status)$(git_custom_status) $%b "
+  PROMPT="$(host_status)$(user_status)$(pwd_status)$(git_custom_status) >%b "
   RPROMPT="$(proc_status)$(venv_status)$(jobs_status)"
 }
